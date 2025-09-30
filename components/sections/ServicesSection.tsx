@@ -55,8 +55,33 @@ export function ServicesSection() {
   ]
 
   return (
-    <section id="services" ref={ref} className="section-padding bg-gradient-to-br from-gray-900 via-black to-gray-800">
-      <div className="container-custom">
+    <section 
+      id="services" 
+      ref={ref} 
+      className="section-padding"
+      style={{
+        backgroundImage: 'url(/images/Banzeeni.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'scroll',
+        position: 'relative'
+      }}
+    >
+      {/* Dark overlay with 60% transparency */}
+      <div 
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0, 0, 0, 0.6)',
+          zIndex: 0
+        }}
+      />
+      {/* Content with higher z-index */}
+      <div className="container-custom relative z-10">
         <div className={`text-center mb-10 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
             How It Works - <span className="text-gradient">3 Easy Steps</span>
