@@ -74,13 +74,8 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
             {/* Company Info */}
             <div className="lg:col-span-2">
-              <div className="flex items-center space-x-3 mb-6">
-                <img 
-                  src="/images/Banzeeni logo.png" 
-                  alt="Banzeeni Logo" 
-                  className="h-16 md:h-20 w-auto"
-                />
-                <span className="text-2xl md:text-3xl font-bold text-white">Banzeeni</span>
+              <div className="mb-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-white">Banzeeni</h3>
               </div>
               <p className="text-white mb-6 leading-relaxed">
                 Revolutionizing fuel delivery with safe, reliable, and convenient service. 
