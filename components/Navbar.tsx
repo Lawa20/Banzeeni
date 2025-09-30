@@ -73,7 +73,7 @@ export function Navbar() {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <button 
             onClick={() => window.location.reload()}
@@ -82,44 +82,45 @@ export function Navbar() {
             <img 
               src="/images/B logo.png" 
               alt="Banzeeni Logo" 
-              className="w-8 h-8"
+              className="w-6 h-6 sm:w-8 sm:h-8"
             />
-            <span className="text-xl font-bold text-white">Banzeeni</span>
+            <span className="text-lg sm:text-xl font-bold text-white">Banzeeni</span>
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => smoothScrollTo(item.href)}
-                className="text-white hover:text-primary-400 font-medium transition-colors duration-200 hover:-translate-y-0.5"
+                className="text-white hover:text-primary-400 font-medium transition-colors duration-200 hover:-translate-y-0.5 text-sm lg:text-base"
               >
                 {item.name}
               </button>
             ))}
             <button 
               onClick={() => window.open('https://apps.apple.com/iq/app/banzeeni/id6443919393', '_blank')}
-              className="btn-primary flex items-center space-x-2 hover:scale-105 transition-transform duration-200"
+              className="btn-primary flex items-center space-x-2 hover:scale-105 transition-transform duration-200 text-sm px-4 py-2"
             >
               <Smartphone className="w-4 h-4" />
-              <span>Download App</span>
+              <span className="hidden lg:inline">Download App</span>
+              <span className="lg:hidden">App</span>
             </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200 animate-slide-down">
-            <div className="py-4 space-y-4">
+          <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-700 animate-slide-down">
+            <div className="py-4 space-y-3 px-4">
               {navItems.map((item) => (
                 <button
                   key={item.name}
@@ -127,18 +128,20 @@ export function Navbar() {
                     smoothScrollTo(item.href)
                     setIsOpen(false)
                   }}
-                  className="block w-full text-left px-4 py-2 text-white hover:text-primary-400 font-medium transition-colors hover:translate-x-2"
+                  className="block w-full text-left px-3 py-3 text-white hover:text-primary-400 font-medium transition-colors hover:translate-x-2 rounded-lg hover:bg-gray-800/50"
                 >
                   {item.name}
                 </button>
               ))}
-              <button 
-                onClick={() => window.open('https://apps.apple.com/iq/app/banzeeni/id6443919393', '_blank')}
-                className="mx-4 btn-primary flex items-center space-x-2 w-full justify-center hover:scale-105 transition-transform duration-200"
-              >
-                <Smartphone className="w-4 h-4" />
-                <span>Download App</span>
-              </button>
+              <div className="pt-2 border-t border-gray-700">
+                <button 
+                  onClick={() => window.open('https://apps.apple.com/iq/app/banzeeni/id6443919393', '_blank')}
+                  className="w-full btn-primary flex items-center justify-center space-x-2 hover:scale-105 transition-transform duration-200 text-sm py-3"
+                >
+                  <Smartphone className="w-4 h-4" />
+                  <span>Download App</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
