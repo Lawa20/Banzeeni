@@ -57,11 +57,11 @@ export function ServicesSection() {
   return (
     <section id="services" ref={ref} className="section-padding bg-gradient-to-br from-gray-900 via-black to-gray-800">
       <div className="container-custom">
-        <div className={`text-center mb-16 transition-all duration-1000 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+        <div className={`text-center mb-10 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
             How It Works - <span className="text-gradient">3 Easy Steps</span>
           </h2>
-          <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed px-4">
             Getting fuel delivered has never been easier. Follow these simple steps 
             and have fuel at your location in no time.
           </p>

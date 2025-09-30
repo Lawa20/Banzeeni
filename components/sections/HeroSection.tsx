@@ -63,15 +63,15 @@ export function HeroSection() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 animate-slide-up px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8 md:mb-12 animate-slide-up px-4">
             {[
               { number: '10K+', label: 'Happy Customers' },
               { number: '50K+', label: 'Deliveries' },
               { number: '99.9%', label: 'Safety Record' },
               { number: '24/7', label: 'Service' },
             ].map((stat, index) => (
-              <div key={index} className="text-center p-2">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary-400 mb-1 sm:mb-2">
+              <div key={index} className="text-center p-1 sm:p-2">
+                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary-400 mb-1">
                   {stat.number}
                 </div>
                 <div className="text-xs sm:text-sm md:text-base text-white leading-tight">

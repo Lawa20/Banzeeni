@@ -58,22 +58,22 @@ export function AboutSection() {
     <section id="about" ref={ref} className="section-padding bg-gradient-to-br from-gray-900 via-black to-gray-800">
       <div className="container-custom">
         {/* Section Header */}
-        <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 px-4">
+        <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 md:mb-6 px-4">
             What is <span className="text-gradient">Banzeeni</span>?
           </h2>
-          <p className="text-lg sm:text-xl text-white max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed px-4">
             Banzeeni revolutionizes fuel delivery by bringing the gas station to you. 
             Whether you&apos;re at home, office, or on the road, we deliver fuel directly to your location.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`bg-gray-800 rounded-2xl p-6 md:p-8 shadow-lg border border-gray-700 group cursor-pointer ${
+              className={`bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border border-gray-700 group cursor-pointer ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ 
@@ -89,13 +89,13 @@ export function AboutSection() {
                 e.currentTarget.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)'
               }}
             >
-              <div className={`w-12 h-12 md:w-16 md:h-16 ${feature.bgColor} rounded-2xl flex items-center justify-center mb-4 md:mb-6`}>
-                <feature.icon className={`w-6 h-6 md:w-8 md:h-8 ${feature.color}`} />
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 ${feature.bgColor} rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 md:mb-6`}>
+                <feature.icon className={`w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 ${feature.color}`} />
               </div>
-              <h3 className="text-lg md:text-xl font-semibold text-white mb-3 md:mb-4">
+              <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3 md:mb-4">
                 {feature.title}
               </h3>
-              <p className="text-sm md:text-base text-white leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base text-white leading-relaxed">
                 {feature.description}
               </p>
             </div>

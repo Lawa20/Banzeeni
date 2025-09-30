@@ -92,11 +92,11 @@ export function ContactSection() {
       />
       {/* Content with higher z-index */}
       <div className="container-custom relative z-10">
-        <div className={`text-center mb-16 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+        <div className={`text-center mb-10 sm:mb-12 md:mb-16 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
             Get in <span className="text-gradient">Touch</span>
           </h2>
-          <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed px-4">
             Have questions about our fuel delivery service? We&apos;re here to help! 
             Contact us anytime and we&apos;ll get back to you promptly.
           </p>
