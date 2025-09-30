@@ -5,19 +5,23 @@ import Lenis from 'lenis'
 
 export function LenisScrollProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
   useEffect(() => {
-    // Initialize Lenis with mobile-optimized settings
+    // Initialize Lenis with mobile-first settings
     lenisRef.current = new Lenis({
-      duration: 1.2,
+      duration: isMobile ? 0.8 : 1.2, // Faster on mobile
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
       mouseMultiplier: 1,
-      smoothTouch: false, // Disable smooth touch on mobile for better performance
-      touchMultiplier: 2,
+      smoothTouch: true, // Enable smooth touch for mobile
+      touchMultiplier: isMobile ? 0.8 : 1, // More responsive on mobile
       infinite: false,
+      normalizeWheel: true, // Normalize wheel events
+      syncTouch: true, // Sync touch events
+      autoRaf: true, // Enable auto RAF
     })
 
     // Get scroll element
@@ -72,13 +76,36 @@ export function LenisScrollProvider({ children }: { children: React.ReactNode })
       subtree: true
     })
 
-    // Lenis animation frame
-    function raf(time: number) {
-      lenis?.raf(time)
-      requestAnimationFrame(raf)
+    // Ensure Lenis is properly initialized before starting RAF
+    const initializeLenis = () => {
+      if (lenis) {
+        // Force Lenis to start
+        lenis.start()
+        
+        // Lenis animation frame
+        function raf(time: number) {
+          lenis?.raf(time)
+          requestAnimationFrame(raf)
+        }
+        
+        requestAnimationFrame(raf)
+      }
     }
 
-    requestAnimationFrame(raf)
+    // Initialize after a short delay to ensure DOM is ready
+    setTimeout(initializeLenis, 100)
+
+    // Add fallback for mobile touch events
+    const handleTouchStart = (e: TouchEvent) => {
+      // Ensure Lenis is active on first touch
+      if (lenis && !lenis.isActive) {
+        lenis.start()
+      }
+    }
+
+    // Add touch event listeners for mobile
+    document.addEventListener('touchstart', handleTouchStart, { passive: true })
+    document.addEventListener('touchmove', handleTouchStart, { passive: true })
 
     // Handle resize
     const handleResize = () => {
@@ -90,6 +117,8 @@ export function LenisScrollProvider({ children }: { children: React.ReactNode })
     return () => {
       observer.disconnect()
       window.removeEventListener('resize', handleResize)
+      document.removeEventListener('touchstart', handleTouchStart)
+      document.removeEventListener('touchmove', handleTouchStart)
       lenis?.destroy()
       const navLinks = document.querySelectorAll('a[href^="#"]')
       navLinks.forEach(link => {

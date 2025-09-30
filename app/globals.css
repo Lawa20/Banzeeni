@@ -319,8 +319,11 @@ section {
     html, body {
       /* Natural mobile scrolling */
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior: none;
+      overscroll-behavior: auto; /* Allow natural overscroll */
       touch-action: pan-y;
+      /* Ensure scroll is not blocked */
+      overflow-x: hidden;
+      overflow-y: auto;
     }
   }
   
