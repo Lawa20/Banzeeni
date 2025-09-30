@@ -104,21 +104,21 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-700 overflow-hidden"
             >
               <motion.div 
-                initial={{ y: -20, opacity: 0 }}
+                initial={{ y: -15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
+                transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="py-4 space-y-3 px-4"
               >
                 {navItems.map((item, index) => (
                   <motion.button
                     key={item.name}
-                    initial={{ x: -20, opacity: 0 }}
+                    initial={{ x: -15, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
+                    transition={{ duration: 0.4, delay: 0.15 + index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                     onClick={() => {
                       smoothScrollTo(item.href)
                       setIsOpen(false)
@@ -129,9 +129,9 @@ export function Navbar() {
                   </motion.button>
                 ))}
                 <motion.div 
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={{ y: 15, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.5 }}
+                  transition={{ duration: 0.4, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="pt-2 border-t border-gray-700"
                 >
                   <button 
