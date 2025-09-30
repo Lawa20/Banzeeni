@@ -8,6 +8,9 @@
     scroll-behavior: smooth;
     scroll-padding-top: 120px; /* Account for fixed navbar */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    /* Fix glitchy mobile scrolling */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
   }
   
   * {
@@ -55,24 +58,27 @@
     }
   }
   
-  /* Mobile background optimization - use scroll for better performance */
+  /* Mobile background optimization - now using fixed for parallax effect */
   @media (max-width: 768px) {
     body {
       background-image: url('/images/Banzeeni.jpg');
       background-size: cover;
       background-position: center center;
-      background-attachment: scroll; /* Scroll on mobile for better performance */
+      background-attachment: fixed; /* Fixed on mobile for parallax effect */
       background-repeat: no-repeat;
       background-color: #000000;
     }
     
-    /* Override fixed attachment on mobile for all sections */
-    section {
-      background-attachment: scroll !important;
+    /* Fix glitchy mobile scrolling */
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
     }
     
-    footer {
-      background-attachment: scroll !important;
+    body {
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: touch;
     }
   }
   
@@ -81,18 +87,21 @@
       background-image: url('/images/Banzeeni.jpg');
       background-size: cover;
       background-position: center center;
-      background-attachment: scroll; /* Scroll on small mobile for better performance */
+      background-attachment: fixed; /* Fixed on small mobile for parallax effect */
       background-repeat: no-repeat;
       background-color: #000000;
     }
     
-    /* Ensure scroll attachment on small mobile */
-    section {
-      background-attachment: scroll !important;
+    /* Enhanced mobile scroll fixes */
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
     }
     
-    footer {
-      background-attachment: scroll !important;
+    body {
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: touch;
     }
   }
   

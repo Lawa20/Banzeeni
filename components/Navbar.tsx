@@ -35,10 +35,10 @@ export function Navbar() {
       const paddingOffset = isAboutSection ? 60 : 40
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Ultra-smooth scroll animation
+      // Ultra-smooth scroll animation with mobile optimization
       const startPosition = window.pageYOffset
       const distance = targetPosition - startPosition
-      const duration = 1000 // Slightly longer for smoother feel
+      const duration = 800 // Reduced duration for less glitchy mobile scrolling
       let start: number | null = null
 
       const animation = (currentTime: number) => {
@@ -46,17 +46,25 @@ export function Navbar() {
         const timeElapsed = currentTime - start
         const progress = Math.min(timeElapsed / duration, 1)
         
-        // Ultra-smooth easing function - easeOutExpo for buttery smooth scrolling
-        const easeOutExpo = (t: number) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
-        const ease = easeOutExpo(progress)
+        // Smoother easing function for mobile
+        const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
+        const ease = easeOutCubic(progress)
         
-        window.scrollTo(0, startPosition + distance * ease)
+        // Use smooth scroll with better mobile support
+        const currentPosition = startPosition + distance * ease
+        window.scrollTo({
+          top: currentPosition,
+          behavior: 'auto' // Disable native smooth scroll to avoid conflicts
+        })
         
         if (timeElapsed < duration) {
           requestAnimationFrame(animation)
         } else {
           // Ensure perfect final position
-          window.scrollTo(0, targetPosition)
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'auto'
+          })
         }
       }
       
