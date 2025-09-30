@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 
 export function ScrollUtils() {
   useEffect(() => {
-    // Global smooth scroll utility
-    const smoothScrollTo = (target: string) => {
+    // Simple scroll utility - no blocking
+    const scrollTo = (target: string) => {
       const element = document.querySelector(target)
       if (element) {
         const elementRect = element.getBoundingClientRect()
@@ -14,21 +14,16 @@ export function ScrollUtils() {
         
         const targetPosition = elementTop - navbarHeight
         
-        // Use native smooth scroll for all devices
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        })
+        // Simple scroll - no blocking
+        window.scrollTo(0, targetPosition)
       }
     }
 
-    // Add smooth scroll to all navigation links
-    const addSmoothScrollToLinks = () => {
+    // Add scroll to navigation links
+    const addScrollToLinks = () => {
       const navLinks = document.querySelectorAll('a[href^="#"]')
       navLinks.forEach(link => {
-        // Remove existing listeners
         link.removeEventListener('click', handleLinkClick)
-        // Add new listener
         link.addEventListener('click', handleLinkClick)
       })
     }
@@ -37,16 +32,15 @@ export function ScrollUtils() {
       e.preventDefault()
       const target = (e.target as HTMLAnchorElement).getAttribute('href')
       if (target) {
-        smoothScrollTo(target)
+        scrollTo(target)
       }
     }
 
-    // Add smooth scroll to all navigation links
-    addSmoothScrollToLinks()
+    addScrollToLinks()
 
     // Re-add listeners when DOM changes
     const observer = new MutationObserver(() => {
-      addSmoothScrollToLinks()
+      addScrollToLinks()
     })
 
     observer.observe(document.body, {
@@ -54,15 +48,9 @@ export function ScrollUtils() {
       subtree: true
     })
 
-    // Set global scroll behavior - ensure immediate response
-    document.documentElement.style.scrollBehavior = 'smooth'
-    document.body.style.scrollBehavior = 'smooth'
-    
-    // Remove any scroll blocking
+    // Remove ALL scroll blocking
     document.documentElement.style.overscrollBehavior = 'auto'
     document.body.style.overscrollBehavior = 'auto'
-    
-    // Ensure immediate scroll response
     document.documentElement.style.willChange = 'auto'
     document.body.style.willChange = 'auto'
 

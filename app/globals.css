@@ -5,10 +5,9 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 120px; /* Account for fixed navbar */
-    /* Prevent horizontal scroll */
+    /* Basic scroll - no blocking */
     overflow-x: hidden;
+    overflow-y: auto;
   }
   
   * {
@@ -16,18 +15,19 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Fix scroll shaking and improve performance */
+  /* Basic body - no scroll blocking */
   body {
     font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.6;
     background-color: #000000;
     overflow-x: hidden;
+    overflow-y: auto;
     color: #ffffff;
     background-image: url('/images/Banzeeni.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Fixed background for desktop */
+    background-attachment: fixed;
   }
   
   /* Dark overlay with 60% transparency */
@@ -302,94 +302,9 @@ section {
     /* Simple class for fixed elements */
   }
   
-  /* Locomotive Scroll optimizations */
+  /* Basic scroll - no blocking */
   html, body {
-    /* Enable smooth scrolling */
-    scroll-behavior: smooth;
-  }
-  
-  /* Responsive smooth scroll optimization */
-  html {
-    scroll-behavior: smooth;
-    -webkit-scroll-behavior: smooth;
-  }
-  
-  body {
-    scroll-behavior: smooth;
-    -webkit-scroll-behavior: smooth;
-  }
-  
-  /* Mobile scroll optimization */
-  @media (max-width: 768px) {
-    html {
-      scroll-behavior: smooth;
-      -webkit-scroll-behavior: smooth;
-      /* Allow immediate scroll on mobile */
-      overscroll-behavior: auto;
-    }
-    
-    body {
-      scroll-behavior: smooth;
-      -webkit-scroll-behavior: smooth;
-      /* Better mobile scroll performance */
-      -webkit-overflow-scrolling: touch;
-    }
-  }
-  
-  /* Desktop scroll optimization */
-  @media (min-width: 769px) {
-    html {
-      scroll-behavior: smooth;
-      -webkit-scroll-behavior: smooth;
-    }
-    
-    body {
-      scroll-behavior: smooth;
-      -webkit-scroll-behavior: smooth;
-    }
-  }
-  
-  /* Performance optimizations to reduce shakiness */
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  /* Remove scroll blocking - allow immediate scroll */
-  html, body {
-    /* Remove overscroll-behavior that blocks scroll */
-    overscroll-behavior: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Global smooth scroll utility */
-  .smooth-scroll {
-    scroll-behavior: smooth;
-    -webkit-scroll-behavior: smooth;
-  }
-  
-  /* Ensure all scrollable elements are smooth */
-  * {
-    scroll-behavior: smooth;
-  }
-  
-  /* Remove any scroll blocking properties */
-  html, body, main, section {
-    /* Remove any properties that could block scroll */
-    transform: none !important;
-    will-change: auto !important;
-    /* Ensure immediate scroll response */
-    pointer-events: auto !important;
-    touch-action: auto !important;
-  }
-  
-  /* Ensure scroll is never blocked */
-  html {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  
-  body {
+    /* Basic scroll behavior */
     overflow-x: hidden;
     overflow-y: auto;
   }

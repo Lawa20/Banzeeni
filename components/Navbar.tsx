@@ -22,7 +22,7 @@ export function Navbar() {
     { name: 'Contact', href: '#contact' },
   ]
 
-  const smoothScrollTo = (elementId: string) => {
+  const scrollTo = (elementId: string) => {
     const element = document.querySelector(elementId)
     if (element) {
       const elementRect = element.getBoundingClientRect()
@@ -33,11 +33,8 @@ export function Navbar() {
       const paddingOffset = isAboutSection ? (window.innerWidth < 768 ? 40 : 60) : (window.innerWidth < 768 ? 20 : 40)
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Always use native smooth scroll for better responsiveness
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      })
+      // Simple scroll - no blocking
+      window.scrollTo(0, targetPosition)
     }
   }
 
@@ -69,7 +66,7 @@ export function Navbar() {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => smoothScrollTo(item.href)}
+                onClick={() => scrollTo(item.href)}
                 className="text-white hover:text-primary-400 font-medium transition-colors duration-200 hover:-translate-y-0.5 text-sm lg:text-base"
               >
                 {item.name}
@@ -102,7 +99,7 @@ export function Navbar() {
                   <button
                     key={item.name}
                     onClick={() => {
-                      smoothScrollTo(item.href)
+                      scrollTo(item.href)
                       setIsOpen(false)
                     }}
                     className="block w-full text-left px-3 py-3 text-white hover:text-primary-400 font-medium transition-colors hover:translate-x-2 rounded-lg hover:bg-gray-800/50"
