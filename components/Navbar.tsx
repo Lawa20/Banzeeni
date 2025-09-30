@@ -23,33 +23,30 @@ export function Navbar() {
   ]
 
   const smoothScrollTo = (elementId: string) => {
-    const element = document.querySelector(elementId)
-    if (element) {
-      // Get element position and dimensions
-      const elementRect = element.getBoundingClientRect()
-      const elementTop = elementRect.top + window.pageYOffset
-      const navbarHeight = 80
-      
-      // Calculate target position with proper spacing
-      const isAboutSection = elementId === '#about'
-      const paddingOffset = isAboutSection ? 60 : 40
-      const targetPosition = elementTop - navbarHeight - paddingOffset
-      
-      // Prevent scroll conflicts and shaking
-      document.documentElement.style.scrollBehavior = 'smooth'
-      document.body.style.scrollBehavior = 'smooth'
-      
-      // Use native smooth scroll for better performance and reliability
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
+    // Use Locomotive Scroll for smooth scrolling
+    if (typeof window !== 'undefined' && (window as any).locomotiveScroll) {
+      (window as any).locomotiveScroll.scrollTo(elementId, {
+        offset: -80,
+        duration: 1000,
+        easing: [0.25, 0.0, 0.35, 1.0]
       })
-      
-      // Reset scroll behavior after animation
-      setTimeout(() => {
-        document.documentElement.style.scrollBehavior = ''
-        document.body.style.scrollBehavior = ''
-      }, 1000)
+    } else {
+      // Fallback to native smooth scroll
+      const element = document.querySelector(elementId)
+      if (element) {
+        const elementRect = element.getBoundingClientRect()
+        const elementTop = elementRect.top + window.pageYOffset
+        const navbarHeight = 80
+        
+        const isAboutSection = elementId === '#about'
+        const paddingOffset = isAboutSection ? 60 : 40
+        const targetPosition = elementTop - navbarHeight - paddingOffset
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+      }
     }
   }
 

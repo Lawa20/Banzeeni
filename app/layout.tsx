@@ -4,6 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { ScrollToTop } from '@/components/ui/ScrollToTop'
+import { LocomotiveScrollProvider } from '@/components/LocomotiveScroll'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -78,10 +79,12 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
       <body className="font-sans antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <ScrollToTop />
+        <LocomotiveScrollProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <ScrollToTop />
+        </LocomotiveScrollProvider>
       </body>
     </html>
   )
