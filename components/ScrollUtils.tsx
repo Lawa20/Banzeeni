@@ -54,9 +54,17 @@ export function ScrollUtils() {
       subtree: true
     })
 
-    // Set global scroll behavior
+    // Set global scroll behavior - ensure immediate response
     document.documentElement.style.scrollBehavior = 'smooth'
     document.body.style.scrollBehavior = 'smooth'
+    
+    // Remove any scroll blocking
+    document.documentElement.style.overscrollBehavior = 'auto'
+    document.body.style.overscrollBehavior = 'auto'
+    
+    // Ensure immediate scroll response
+    document.documentElement.style.willChange = 'auto'
+    document.body.style.willChange = 'auto'
 
     return () => {
       observer.disconnect()

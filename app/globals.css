@@ -324,8 +324,8 @@ section {
     html {
       scroll-behavior: smooth;
       -webkit-scroll-behavior: smooth;
-      /* Prevent scroll conflicts on mobile */
-      overscroll-behavior: none;
+      /* Allow immediate scroll on mobile */
+      overscroll-behavior: auto;
     }
     
     body {
@@ -351,15 +351,14 @@ section {
   
   /* Performance optimizations to reduce shakiness */
   * {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Prevent scroll conflicts */
+  /* Remove scroll blocking - allow immediate scroll */
   html, body {
-    overscroll-behavior: none;
+    /* Remove overscroll-behavior that blocks scroll */
+    overscroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
   }
   
@@ -372,6 +371,27 @@ section {
   /* Ensure all scrollable elements are smooth */
   * {
     scroll-behavior: smooth;
+  }
+  
+  /* Remove any scroll blocking properties */
+  html, body, main, section {
+    /* Remove any properties that could block scroll */
+    transform: none !important;
+    will-change: auto !important;
+    /* Ensure immediate scroll response */
+    pointer-events: auto !important;
+    touch-action: auto !important;
+  }
+  
+  /* Ensure scroll is never blocked */
+  html {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
 @media (max-width: 480px) {
