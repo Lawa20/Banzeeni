@@ -38,7 +38,7 @@ export function AppShowcaseSection() {
                 <div className="w-full h-full bg-gray-800 rounded-[2.5rem] overflow-hidden relative">
                   {/* App Screenshot */}
                   <img 
-                    src="/images/mobile.png" 
+                    src="/images/appp.jpg" 
                     alt="Banzeeni Mobile App Screenshot"
                     className="w-full h-full object-cover rounded-[2.5rem]"
                   />
