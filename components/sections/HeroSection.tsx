@@ -2,6 +2,7 @@
 
 import { useInView } from 'react-intersection-observer'
 import { ChevronDown, Apple, Smartphone } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export function HeroSection() {
   const [ref, inView] = useInView({
@@ -51,65 +52,114 @@ export function HeroSection() {
       </div>
 
       <div className="container-custom relative z-10">
-        <div className={`text-center max-w-4xl mx-auto transition-all duration-1000 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="text-center max-w-4xl mx-auto"
+        >
           {/* Main Heading */}
-          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 animate-fade-in leading-tight">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+            className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight"
+          >
             <span className="text-gradient">On-Demand</span>
             <br />
             <span className="text-white">Fuel Delivery</span>
-          </h1>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed animate-slide-up px-4">
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed px-4"
+          >
             Get fuel delivered to your location with Banzeeni. 
             <span className="font-semibold text-primary-400"> Safe, reliable, and convenient</span> fuel delivery 
             for individuals and businesses.
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 animate-slide-up px-4">
-            <button 
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 px-4"
+          >
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => window.open('https://apps.apple.com/iq/app/banzeeni/id6443919393', '_blank')}
               className="btn-primary flex items-center justify-center space-x-2 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto min-h-[48px]"
             >
               <Apple className="w-5 h-5 sm:w-6 sm:h-6" />
               <span>Download for iOS</span>
-            </button>
-            <button 
+            </motion.button>
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => window.open('https://play.google.com/store/apps/details?id=iq.click.banzeeni&pcampaignid=web_share', '_blank')}
               className="btn-secondary flex items-center justify-center space-x-2 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto min-h-[48px]"
             >
               <Smartphone className="w-5 h-5 sm:w-6 sm:h-6" />
               <span>Download for Android</span>
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8 md:mb-12 animate-slide-up px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8 md:mb-12 px-4"
+          >
             {[
               { number: '10K+', label: 'Happy Customers' },
               { number: '50K+', label: 'Deliveries' },
               { number: '99.9%', label: 'Safety Record' },
               { number: '24/7', label: 'Service' },
             ].map((stat, index) => (
-              <div key={index} className="text-center p-1 sm:p-2">
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.0 + index * 0.1, ease: 'easeOut' }}
+                className="text-center p-1 sm:p-2"
+              >
                 <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary-400 mb-1">
                   {stat.number}
                 </div>
                 <div className="text-xs sm:text-sm md:text-base text-white leading-tight">
                   {stat.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Scroll Indicator */}
-          <div className="scroll-indicator flex flex-col items-center space-y-2">
-            <div className="text-white text-sm opacity-70 mb-2">Scroll to explore</div>
-            <div className="animate-bounce-slow">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.4, ease: 'easeOut' }}
+            className="scroll-indicator flex flex-col items-center space-y-2"
+          >
+            <motion.div 
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="text-white text-sm opacity-70 mb-2"
+            >
+              Scroll to explore
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            >
               <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 text-white mx-auto opacity-60" />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -8,9 +8,12 @@
     scroll-behavior: smooth;
     scroll-padding-top: 120px; /* Account for fixed navbar */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    /* Fix glitchy mobile scrolling */
+    /* Fix glitchy scrolling on all devices */
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
+    /* Better scroll performance */
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
   }
   
   * {
@@ -58,6 +61,22 @@
     }
   }
   
+  /* Desktop scroll optimization */
+  @media (min-width: 769px) {
+    html {
+      scroll-behavior: smooth;
+      -webkit-scroll-behavior: smooth;
+      overscroll-behavior: none;
+    }
+    
+    body {
+      overscroll-behavior: none;
+      /* Better desktop scroll performance */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+  
   /* Mobile background optimization - now using fixed for parallax effect */
   @media (max-width: 768px) {
     body {
@@ -67,6 +86,15 @@
       background-attachment: fixed; /* Fixed on mobile for parallax effect */
       background-repeat: no-repeat;
       background-color: #000000;
+    }
+    
+    /* Ensure all sections use fixed background on mobile */
+    section {
+      background-attachment: fixed !important;
+    }
+    
+    footer {
+      background-attachment: fixed !important;
     }
     
     /* Fix glitchy mobile scrolling */
@@ -90,6 +118,15 @@
       background-attachment: fixed; /* Fixed on small mobile for parallax effect */
       background-repeat: no-repeat;
       background-color: #000000;
+    }
+    
+    /* Ensure all sections use fixed background on small mobile */
+    section {
+      background-attachment: fixed !important;
+    }
+    
+    footer {
+      background-attachment: fixed !important;
     }
     
     /* Enhanced mobile scroll fixes */

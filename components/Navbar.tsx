@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Menu, X, Smartphone } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -35,40 +36,11 @@ export function Navbar() {
       const paddingOffset = isAboutSection ? 60 : 40
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Ultra-smooth scroll animation with mobile optimization
-      const startPosition = window.pageYOffset
-      const distance = targetPosition - startPosition
-      const duration = 800 // Reduced duration for less glitchy mobile scrolling
-      let start: number | null = null
-
-      const animation = (currentTime: number) => {
-        if (start === null) start = currentTime
-        const timeElapsed = currentTime - start
-        const progress = Math.min(timeElapsed / duration, 1)
-        
-        // Smoother easing function for mobile
-        const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
-        const ease = easeOutCubic(progress)
-        
-        // Use smooth scroll with better mobile support
-        const currentPosition = startPosition + distance * ease
-        window.scrollTo({
-          top: currentPosition,
-          behavior: 'auto' // Disable native smooth scroll to avoid conflicts
-        })
-        
-        if (timeElapsed < duration) {
-          requestAnimationFrame(animation)
-        } else {
-          // Ensure perfect final position
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'auto'
-          })
-        }
-      }
-      
-      requestAnimationFrame(animation)
+      // Use native smooth scroll for better performance and reliability
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      })
     }
   }
 
@@ -126,33 +98,54 @@ export function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-700 animate-slide-down">
-            <div className="py-4 space-y-3 px-4">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    smoothScrollTo(item.href)
-                    setIsOpen(false)
-                  }}
-                  className="block w-full text-left px-3 py-3 text-white hover:text-primary-400 font-medium transition-colors hover:translate-x-2 rounded-lg hover:bg-gray-800/50"
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-700 overflow-hidden"
+            >
+              <motion.div 
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="py-4 space-y-3 px-4"
+              >
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.name}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
+                    onClick={() => {
+                      smoothScrollTo(item.href)
+                      setIsOpen(false)
+                    }}
+                    className="block w-full text-left px-3 py-3 text-white hover:text-primary-400 font-medium transition-colors hover:translate-x-2 rounded-lg hover:bg-gray-800/50"
+                  >
+                    {item.name}
+                  </motion.button>
+                ))}
+                <motion.div 
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.5 }}
+                  className="pt-2 border-t border-gray-700"
                 >
-                  {item.name}
-                </button>
-              ))}
-              <div className="pt-2 border-t border-gray-700">
-                <button 
-                  onClick={() => window.open('https://apps.apple.com/iq/app/banzeeni/id6443919393', '_blank')}
-                  className="w-full btn-primary flex items-center justify-center space-x-2 hover:scale-105 transition-transform duration-200 text-sm py-3"
-                >
-                  <Smartphone className="w-4 h-4" />
-                  <span>Download App</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+                  <button 
+                    onClick={() => window.open('https://apps.apple.com/iq/app/banzeeni/id6443919393', '_blank')}
+                    className="w-full btn-primary flex items-center justify-center space-x-2 hover:scale-105 transition-transform duration-200 text-sm py-3"
+                  >
+                    <Smartphone className="w-4 h-4" />
+                    <span>Download App</span>
+                  </button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   )
