@@ -1,11 +1,17 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export function ScrollUtils() {
+  const isInitialized = useRef(false)
+
   useEffect(() => {
-    // Smooth scroll utility with immediate response
-    const smoothScrollTo = (target: string) => {
+    // Ensure immediate initialization
+    if (isInitialized.current) return
+    isInitialized.current = true
+
+    // Immediate scroll utility - no delays
+    const scrollTo = (target: string) => {
       const element = document.querySelector(target)
       if (element) {
         const elementRect = element.getBoundingClientRect()
@@ -14,41 +20,35 @@ export function ScrollUtils() {
         
         const targetPosition = elementTop - navbarHeight
         
-        // Try smooth scroll first, fallback to instant scroll
-        if ('scrollBehavior' in document.documentElement.style) {
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          })
-        } else {
-          // Fallback for browsers that don't support smooth scroll
-          window.scrollTo(0, targetPosition)
-        }
+        // Immediate scroll - no smooth behavior that could cause delays
+        window.scrollTo(0, targetPosition)
       }
     }
 
-    // Add smooth scroll to navigation links
-    const addSmoothScrollToLinks = () => {
+    // Add scroll to navigation links immediately
+    const addScrollToLinks = () => {
       const navLinks = document.querySelectorAll('a[href^="#"]')
       navLinks.forEach(link => {
         link.removeEventListener('click', handleLinkClick)
-        link.addEventListener('click', handleLinkClick)
+        link.addEventListener('click', handleLinkClick, { passive: false })
       })
     }
 
     const handleLinkClick = (e: Event) => {
       e.preventDefault()
+      e.stopPropagation()
       const target = (e.target as HTMLAnchorElement).getAttribute('href')
       if (target) {
-        smoothScrollTo(target)
+        scrollTo(target)
       }
     }
 
-    addSmoothScrollToLinks()
+    // Initialize immediately
+    addScrollToLinks()
 
     // Re-add listeners when DOM changes
     const observer = new MutationObserver(() => {
-      addSmoothScrollToLinks()
+      addScrollToLinks()
     })
 
     observer.observe(document.body, {
@@ -56,13 +56,11 @@ export function ScrollUtils() {
       subtree: true
     })
 
-    // Enable smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth'
-    document.body.style.scrollBehavior = 'smooth'
-    
-    // Remove scroll blocking
+    // Remove ALL scroll blocking immediately
     document.documentElement.style.overscrollBehavior = 'auto'
     document.body.style.overscrollBehavior = 'auto'
+    document.documentElement.style.willChange = 'auto'
+    document.body.style.willChange = 'auto'
 
     return () => {
       observer.disconnect()

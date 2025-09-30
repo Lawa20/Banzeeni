@@ -84,6 +84,19 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Ensure immediate scroll initialization
+              document.addEventListener('DOMContentLoaded', function() {
+                document.documentElement.style.overscrollBehavior = 'auto';
+                document.body.style.overscrollBehavior = 'auto';
+                document.documentElement.style.willChange = 'auto';
+                document.body.style.willChange = 'auto';
+              });
+            `,
+          }}
+        />
       </body>
     </html>
   )
