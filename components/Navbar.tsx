@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Menu, X, Smartphone } from 'lucide-react'
-import { gsap } from 'gsap'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -46,18 +45,10 @@ export function Navbar() {
       const paddingOffset = isAboutSection ? (isMobile ? 40 : 60) : (isMobile ? 20 : 40)
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Responsive duration and easing
-      const duration = isMobile ? 0.8 : 1.2
-      const ease = isMobile ? "power2.out" : "power2.inOut"
-      
-      // Use GSAP for smooth scroll with responsive settings
-      gsap.to(window, {
-        duration: duration,
-        scrollTo: { 
-          y: targetPosition, 
-          autoKill: false 
-        },
-        ease: ease
+      // Use native smooth scroll for better mobile compatibility
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       })
     }
   }

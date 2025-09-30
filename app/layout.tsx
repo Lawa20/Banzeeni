@@ -4,7 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { ScrollToTop } from '@/components/ui/ScrollToTop'
-import { GSAPScrollNav } from '@/components/GSAPScrollNav'
+import { LenisScrollProvider } from '@/components/LenisScrollProvider'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -79,11 +79,12 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
       <body className="font-sans antialiased">
-        <GSAPScrollNav />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <ScrollToTop />
+        <LenisScrollProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <ScrollToTop />
+        </LenisScrollProvider>
       </body>
     </html>
   )
