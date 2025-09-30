@@ -302,7 +302,7 @@ section {
     /* Simple class for fixed elements */
   }
   
-  /* Immediate scroll - no delays */
+  /* GSAP optimized scroll */
   html {
     overflow-x: hidden;
     overflow-y: auto;
@@ -311,6 +311,13 @@ section {
   body {
     overflow-x: hidden;
     overflow-y: auto;
+  }
+  
+  /* GSAP scroll container */
+  .gsap-scroll-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
 @media (max-width: 480px) {

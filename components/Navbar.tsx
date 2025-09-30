@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Menu, X, Smartphone } from 'lucide-react'
+import { gsap } from 'gsap'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,7 +23,7 @@ export function Navbar() {
     { name: 'Contact', href: '#contact' },
   ]
 
-  const scrollTo = (elementId: string) => {
+  const smoothScrollTo = (elementId: string) => {
     const element = document.querySelector(elementId)
     if (element) {
       const elementRect = element.getBoundingClientRect()
@@ -33,8 +34,15 @@ export function Navbar() {
       const paddingOffset = isAboutSection ? (window.innerWidth < 768 ? 40 : 60) : (window.innerWidth < 768 ? 20 : 40)
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Immediate scroll - no delays
-      window.scrollTo(0, targetPosition)
+      // Use GSAP for smooth scroll
+      gsap.to(window, {
+        duration: 1.2,
+        scrollTo: { 
+          y: targetPosition, 
+          autoKill: false 
+        },
+        ease: "power2.inOut"
+      })
     }
   }
 
@@ -66,7 +74,7 @@ export function Navbar() {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollTo(item.href)}
+                onClick={() => smoothScrollTo(item.href)}
                 className="text-white hover:text-primary-400 font-medium transition-colors duration-200 hover:-translate-y-0.5 text-sm lg:text-base"
               >
                 {item.name}
@@ -99,7 +107,7 @@ export function Navbar() {
                   <button
                     key={item.name}
                     onClick={() => {
-                      scrollTo(item.href)
+                      smoothScrollTo(item.href)
                       setIsOpen(false)
                     }}
                     className="block w-full text-left px-3 py-3 text-white hover:text-primary-400 font-medium transition-colors hover:translate-x-2 rounded-lg hover:bg-gray-800/50"

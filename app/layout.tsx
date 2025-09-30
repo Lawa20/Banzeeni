@@ -4,7 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { ScrollToTop } from '@/components/ui/ScrollToTop'
-import { ScrollUtils } from '@/components/ScrollUtils'
+import { GSAPScrollNav } from '@/components/GSAPScrollNav'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -79,24 +79,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
       <body className="font-sans antialiased">
-        <ScrollUtils />
+        <GSAPScrollNav />
         <Navbar />
         <main>{children}</main>
         <Footer />
         <ScrollToTop />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Ensure immediate scroll initialization
-              document.addEventListener('DOMContentLoaded', function() {
-                document.documentElement.style.overscrollBehavior = 'auto';
-                document.body.style.overscrollBehavior = 'auto';
-                document.documentElement.style.willChange = 'auto';
-                document.body.style.willChange = 'auto';
-              });
-            `,
-          }}
-        />
       </body>
     </html>
   )
