@@ -1,14 +1,13 @@
 'use client'
 
-import { useInView } from 'react-intersection-observer'
 import { Apple, Smartphone, Star } from 'lucide-react'
+import { useInView } from 'react-intersection-observer'
 
 export function AppShowcaseSection() {
-  const [ref, inView] = useInView({
+  const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
-
 
   const features = [
     { icon: '📍', title: 'GPS Location', desc: 'Precise location detection' },
@@ -31,22 +30,29 @@ export function AppShowcaseSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Mobile App Placeholder */}
+          {/* Mobile App Image */}
           <div className={`relative flex justify-center transition-all duration-1000 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-            <div className="relative w-80 h-[600px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl">
-              <div className="w-full h-full bg-gray-800 rounded-[2.5rem] overflow-hidden relative flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="w-16 h-16 bg-primary-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-2xl">📱</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">Banzeeni App</h3>
-                  <p className="text-sm text-gray-300">Download now</p>
+            <div className="relative w-full max-w-sm">
+              {/* Phone Frame */}
+              <div className="relative w-80 h-[600px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl mx-auto">
+                <div className="w-full h-full bg-gray-800 rounded-[2.5rem] overflow-hidden relative">
+                  {/* App Screenshot */}
+                  <img 
+                    src="/images/mobile.png" 
+                    alt="Banzeeni Mobile App Screenshot"
+                    className="w-full h-full object-cover rounded-[2.5rem]"
+                  />
+                  {/* App Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-[2.5rem]"></div>
                 </div>
               </div>
-            </div>
-            {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg animate-bounce">
-              📱
+              {/* Floating Elements */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg animate-bounce">
+                📱
+              </div>
+              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg animate-pulse">
+                ⚡
+              </div>
             </div>
           </div>
 
@@ -114,32 +120,8 @@ export function AppShowcaseSection() {
                 </div>
               </button>
             </div>
-
-            {/* Additional Info */}
-            <div className="bg-primary-100 rounded-xl p-6">
-              <h4 className="font-semibold text-primary-900 mb-3">App Features</h4>
-              <ul className="space-y-2 text-sm text-primary-800">
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-primary-600 rounded-full" />
-                  <span>Real-time order tracking</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-primary-600 rounded-full" />
-                  <span>Multiple payment methods</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-primary-600 rounded-full" />
-                  <span>Driver communication</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-primary-600 rounded-full" />
-                  <span>Order history & receipts</span>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
-
       </div>
     </section>
   )
