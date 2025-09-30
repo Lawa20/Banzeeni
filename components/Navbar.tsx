@@ -36,19 +36,29 @@ export function Navbar() {
       const paddingOffset = isAboutSection ? 60 : 40
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
+      // Prevent scroll conflicts and shaking
+      document.documentElement.style.scrollBehavior = 'smooth'
+      document.body.style.scrollBehavior = 'smooth'
+      
       // Use native smooth scroll for better performance and reliability
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
       })
+      
+      // Reset scroll behavior after animation
+      setTimeout(() => {
+        document.documentElement.style.scrollBehavior = ''
+        document.body.style.scrollBehavior = ''
+      }, 1000)
     }
   }
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-slide-down ${
-        scrolled 
-          ? 'bg-black/95 backdrop-blur-md shadow-lg' 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-slide-down no-scroll-shake ${
+        scrolled
+          ? 'bg-black/95 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
     >

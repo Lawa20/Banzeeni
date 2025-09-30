@@ -7,13 +7,14 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 120px; /* Account for fixed navbar */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    /* Fix glitchy scrolling on all devices */
+    /* Fix shaking/jittery scrolling */
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
-    /* Better scroll performance */
-    scroll-behavior: smooth;
+    /* Optimize scroll performance */
+    scroll-snap-type: none;
     -webkit-scroll-behavior: smooth;
+    /* Prevent scroll conflicts */
+    overflow-x: hidden;
   }
   
   * {
@@ -21,10 +22,21 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  /* Fix scroll shaking and improve performance */
   body {
     font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.6;
     background-color: #000000;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+    /* Prevent scroll jitter */
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+    /* Hardware acceleration for smooth scrolling */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: scroll-position;
     color: #ffffff;
     background-image: url('/images/Banzeeni.jpg');
     background-size: cover;
@@ -67,6 +79,7 @@
       scroll-behavior: smooth;
       -webkit-scroll-behavior: smooth;
       overscroll-behavior: none;
+      overflow-x: hidden;
     }
     
     body {
@@ -74,6 +87,18 @@
       /* Better desktop scroll performance */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      /* Prevent scroll shaking */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: scroll-position;
+    }
+    
+    /* Fix section scroll shaking */
+    section {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
   }
   
@@ -132,16 +157,29 @@
       background-repeat: no-repeat !important;
     }
     
-    /* Fix glitchy mobile scrolling */
+    /* Fix glitchy mobile scrolling and prevent shaking */
     html {
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: none;
+      overflow-x: hidden;
     }
     
     body {
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
+      /* Prevent mobile scroll shaking */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: scroll-position;
+    }
+    
+    /* Fix mobile section scroll shaking */
+    section {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
   }
   
@@ -171,16 +209,29 @@
       background-repeat: no-repeat !important;
     }
     
-    /* Enhanced mobile scroll fixes */
+    /* Enhanced mobile scroll fixes and prevent shaking */
     html {
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: none;
+      overflow-x: hidden;
     }
     
     body {
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
+      /* Prevent small mobile scroll shaking */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      will-change: scroll-position;
+    }
+    
+    /* Fix small mobile section scroll shaking */
+    section {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
   }
   
@@ -285,15 +336,38 @@ section {
   }
 }
 
-/* Add bounceSlow keyframe */
-@keyframes bounceSlow {
-  0%, 100% { 
-    transform: translateY(0px); 
+  /* Add bounceSlow keyframe */
+  @keyframes bounceSlow {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
   }
-  50% { 
-    transform: translateY(-8px); 
+  
+  /* Prevent scroll shaking and improve performance */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
   }
-}
+  
+  /* Fix any elements that might cause scroll shaking */
+  .no-scroll-shake {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: auto;
+  }
+  
+  /* Optimize fixed elements to prevent scroll conflicts */
+  .fixed-element {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
 
 @media (max-width: 480px) {
   section {
