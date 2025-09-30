@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-@import 'locomotive-scroll/dist/locomotive-scroll.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -309,43 +308,13 @@ section {
     scroll-behavior: smooth;
   }
   
-  /* Locomotive Scroll specific styles */
-  [data-scroll-container] {
-    height: 100vh;
-    overflow: hidden;
+  /* Simple smooth scroll optimization */
+  html {
+    scroll-behavior: smooth;
   }
   
-  [data-scroll-section] {
-    min-height: 100vh;
-  }
-  
-  /* Smooth scroll for Locomotive */
-  .c-scrollbar {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 6px;
-    height: 100vh;
-    transform-origin: top;
-    z-index: 9999;
-  }
-  
-  .c-scrollbar_thumb {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.2);
-    opacity: 0.5;
-    width: 6px;
-    border-radius: 3px;
-    margin: 2px;
-    cursor: -webkit-grab;
-    cursor: grab;
-  }
-  
-  .c-scrollbar_thumb:active {
-    cursor: -webkit-grabbing;
-    cursor: grabbing;
+  body {
+    scroll-behavior: smooth;
   }
 
 @media (max-width: 480px) {

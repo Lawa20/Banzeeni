@@ -23,30 +23,38 @@ export function Navbar() {
   ]
 
   const smoothScrollTo = (elementId: string) => {
-    // Use Locomotive Scroll for smooth scrolling
-    if (typeof window !== 'undefined' && (window as any).locomotiveScroll) {
-      (window as any).locomotiveScroll.scrollTo(elementId, {
-        offset: -80,
-        duration: 1000,
-        easing: [0.25, 0.0, 0.35, 1.0]
-      })
-    } else {
-      // Fallback to native smooth scroll
-      const element = document.querySelector(elementId)
-      if (element) {
-        const elementRect = element.getBoundingClientRect()
-        const elementTop = elementRect.top + window.pageYOffset
-        const navbarHeight = 80
+    const element = document.querySelector(elementId)
+    if (element) {
+      const elementRect = element.getBoundingClientRect()
+      const elementTop = elementRect.top + window.pageYOffset
+      const navbarHeight = 80
+      
+      const isAboutSection = elementId === '#about'
+      const paddingOffset = isAboutSection ? 60 : 40
+      const targetPosition = elementTop - navbarHeight - paddingOffset
+      
+      // Use requestAnimationFrame for ultra-smooth scrolling
+      const startPosition = window.pageYOffset
+      const distance = targetPosition - startPosition
+      const duration = 800
+      let start: number | null = null
+
+      const animation = (currentTime: number) => {
+        if (start === null) start = currentTime
+        const timeElapsed = currentTime - start
+        const progress = Math.min(timeElapsed / duration, 1)
         
-        const isAboutSection = elementId === '#about'
-        const paddingOffset = isAboutSection ? 60 : 40
-        const targetPosition = elementTop - navbarHeight - paddingOffset
+        // Smooth easing function
+        const ease = 1 - Math.pow(1 - progress, 3)
         
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        })
+        window.scrollTo(0, startPosition + distance * ease)
+        
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation)
+        }
       }
+      
+      requestAnimationFrame(animation)
     }
   }
 
