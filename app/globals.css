@@ -319,7 +319,7 @@ section {
     -webkit-scroll-behavior: smooth;
   }
   
-  /* Reduce shakiness on mobile */
+  /* Mobile scroll optimization */
   @media (max-width: 768px) {
     html {
       scroll-behavior: smooth;
@@ -339,11 +339,13 @@ section {
   /* Desktop scroll optimization */
   @media (min-width: 769px) {
     html {
-      scroll-behavior: auto; /* Let custom animation handle desktop */
+      scroll-behavior: smooth;
+      -webkit-scroll-behavior: smooth;
     }
     
     body {
-      scroll-behavior: auto; /* Let custom animation handle desktop */
+      scroll-behavior: smooth;
+      -webkit-scroll-behavior: smooth;
     }
   }
   
@@ -359,6 +361,17 @@ section {
   html, body {
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Global smooth scroll utility */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+  }
+  
+  /* Ensure all scrollable elements are smooth */
+  * {
+    scroll-behavior: smooth;
   }
 
 @media (max-width: 480px) {

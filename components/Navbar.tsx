@@ -33,39 +33,11 @@ export function Navbar() {
       const paddingOffset = isAboutSection ? (window.innerWidth < 768 ? 40 : 60) : (window.innerWidth < 768 ? 20 : 40)
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Use native smooth scroll on mobile for better performance
-      if (window.innerWidth < 768) {
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        })
-        return
-      }
-      
-      // Desktop smooth scroll with requestAnimationFrame
-      const startPosition = window.pageYOffset
-      const distance = targetPosition - startPosition
-      const duration = Math.min(Math.abs(distance) * 0.4, 800) // Responsive duration
-      let start: number | null = null
-
-      const animation = (currentTime: number) => {
-        if (start === null) start = currentTime
-        const timeElapsed = currentTime - start
-        const progress = Math.min(timeElapsed / duration, 1)
-        
-        // Smoother easing function for less shakiness
-        const ease = progress < 0.5 
-          ? 2 * progress * progress 
-          : 1 - Math.pow(-2 * progress + 2, 3) / 2
-        
-        window.scrollTo(0, startPosition + distance * ease)
-        
-        if (timeElapsed < duration) {
-          requestAnimationFrame(animation)
-        }
-      }
-      
-      requestAnimationFrame(animation)
+      // Always use native smooth scroll for better responsiveness
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      })
     }
   }
 

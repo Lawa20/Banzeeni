@@ -4,7 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { ScrollToTop } from '@/components/ui/ScrollToTop'
-import { SimpleSmoothScrollProvider } from '@/components/SimpleSmoothScroll'
+import { ScrollUtils } from '@/components/ScrollUtils'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -79,12 +79,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
       <body className="font-sans antialiased">
-        <SimpleSmoothScrollProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <ScrollToTop />
-        </SimpleSmoothScrollProvider>
+        <ScrollUtils />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <ScrollToTop />
       </body>
     </html>
   )
