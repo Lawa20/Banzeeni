@@ -319,6 +319,28 @@ section {
     width: 100%;
     height: 100%;
   }
+  
+  /* Responsive scroll optimization */
+  @media (max-width: 768px) {
+    html, body {
+      /* Better mobile scroll performance */
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: auto;
+    }
+    
+    /* Mobile-specific scroll behavior */
+    * {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+  }
+  
+  @media (min-width: 769px) {
+    html, body {
+      /* Desktop scroll optimization */
+      scroll-behavior: auto;
+    }
+  }
 
 @media (max-width: 480px) {
   section {

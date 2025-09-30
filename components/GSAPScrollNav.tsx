@@ -1,30 +1,43 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 
 export function GSAPScrollNav() {
+  const [isMobile, setIsMobile] = useState(false)
+
   useEffect(() => {
-    // GSAP smooth scroll for navigation
+    // Check if mobile on mount and resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    // Responsive GSAP smooth scroll for navigation
     const smoothScrollTo = (target: string) => {
       const element = document.querySelector(target)
       if (element) {
         const elementRect = element.getBoundingClientRect()
         const elementTop = elementRect.top + window.pageYOffset
-        const navbarHeight = window.innerWidth < 768 ? 60 : 80
+        const navbarHeight = isMobile ? 60 : 80
         
         const isAboutSection = target === '#about'
-        const paddingOffset = isAboutSection ? (window.innerWidth < 768 ? 40 : 60) : (window.innerWidth < 768 ? 20 : 40)
+        const paddingOffset = isAboutSection ? (isMobile ? 40 : 60) : (isMobile ? 20 : 40)
         const targetPosition = elementTop - navbarHeight - paddingOffset
         
-        // Use GSAP for smooth scroll
+        // Responsive duration based on device
+        const duration = isMobile ? 0.8 : 1.2
+        
+        // Use GSAP for smooth scroll with responsive settings
         gsap.to(window, {
-          duration: 1.2,
+          duration: duration,
           scrollTo: { 
             y: targetPosition, 
             autoKill: false 
           },
-          ease: "power2.inOut"
+          ease: isMobile ? "power2.out" : "power2.inOut"
         })
       }
     }
@@ -67,12 +80,13 @@ export function GSAPScrollNav() {
 
     return () => {
       observer.disconnect()
+      window.removeEventListener('resize', checkMobile)
       const navLinks = document.querySelectorAll('a[href^="#"]')
       navLinks.forEach(link => {
         link.removeEventListener('click', handleNavClick)
       })
     }
-  }, [])
+  }, [isMobile])
 
   return null
 }

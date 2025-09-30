@@ -7,13 +7,25 @@ import { gsap } from 'gsap'
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
     }
+    
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', checkMobile)
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   const navItems = [
@@ -28,20 +40,24 @@ export function Navbar() {
     if (element) {
       const elementRect = element.getBoundingClientRect()
       const elementTop = elementRect.top + window.pageYOffset
-      const navbarHeight = window.innerWidth < 768 ? 60 : 80
+      const navbarHeight = isMobile ? 60 : 80
       
       const isAboutSection = elementId === '#about'
-      const paddingOffset = isAboutSection ? (window.innerWidth < 768 ? 40 : 60) : (window.innerWidth < 768 ? 20 : 40)
+      const paddingOffset = isAboutSection ? (isMobile ? 40 : 60) : (isMobile ? 20 : 40)
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Use GSAP for smooth scroll
+      // Responsive duration and easing
+      const duration = isMobile ? 0.8 : 1.2
+      const ease = isMobile ? "power2.out" : "power2.inOut"
+      
+      // Use GSAP for smooth scroll with responsive settings
       gsap.to(window, {
-        duration: 1.2,
+        duration: duration,
         scrollTo: { 
           y: targetPosition, 
           autoKill: false 
         },
-        ease: "power2.inOut"
+        ease: ease
       })
     }
   }
