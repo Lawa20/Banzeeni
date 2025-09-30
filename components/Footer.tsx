@@ -51,7 +51,7 @@ export function Footer() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'scroll', // Changed from 'fixed' to 'scroll' for mobile responsiveness
+        backgroundAttachment: 'fixed', // Fixed background for desktop
         position: 'relative'
       }}
     >

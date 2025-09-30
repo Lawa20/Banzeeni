@@ -24,8 +24,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* Remove fixed attachment for mobile responsiveness */
-    background-attachment: scroll;
+    background-attachment: fixed; /* Fixed background for desktop */
   }
   
   /* Dark overlay with 60% transparency */
@@ -41,16 +40,39 @@
     pointer-events: none;
   }
   
-  /* Mobile background optimization */
+  /* Performance optimization for devices that don't support fixed backgrounds well */
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      background-attachment: scroll;
+    }
+    
+    section {
+      background-attachment: scroll !important;
+    }
+    
+    footer {
+      background-attachment: scroll !important;
+    }
+  }
+  
+  /* Mobile background optimization - use scroll for better performance */
   @media (max-width: 768px) {
     body {
       background-image: url('/images/Banzeeni.jpg');
       background-size: cover;
       background-position: center center;
-      background-attachment: scroll;
+      background-attachment: scroll; /* Scroll on mobile for better performance */
       background-repeat: no-repeat;
-      /* Force background to show on mobile */
       background-color: #000000;
+    }
+    
+    /* Override fixed attachment on mobile for all sections */
+    section {
+      background-attachment: scroll !important;
+    }
+    
+    footer {
+      background-attachment: scroll !important;
     }
   }
   
@@ -59,10 +81,18 @@
       background-image: url('/images/Banzeeni.jpg');
       background-size: cover;
       background-position: center center;
-      background-attachment: scroll;
+      background-attachment: scroll; /* Scroll on small mobile for better performance */
       background-repeat: no-repeat;
-      /* Ensure proper mobile background */
       background-color: #000000;
+    }
+    
+    /* Ensure scroll attachment on small mobile */
+    section {
+      background-attachment: scroll !important;
+    }
+    
+    footer {
+      background-attachment: scroll !important;
     }
   }
   

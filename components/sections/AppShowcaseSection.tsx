@@ -25,7 +25,7 @@ export function AppShowcaseSection() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'scroll',
+        backgroundAttachment: 'fixed', // Fixed background for desktop
         position: 'relative'
       }}
     >

@@ -23,7 +23,7 @@ export function HeroSection() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'scroll'
+          backgroundAttachment: 'fixed' // Fixed background for desktop
         }}
       >
         {/* Dark overlay with 60% transparency */}
