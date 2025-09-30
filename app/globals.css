@@ -24,7 +24,8 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    /* Remove fixed attachment for mobile responsiveness */
+    background-attachment: scroll;
   }
   
   /* Dark overlay to maintain black theme */
@@ -60,69 +61,17 @@
   .btn-primary {
     @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-out transform hover:scale-105 hover:shadow-lg;
   }
-  
   .btn-secondary {
     @apply bg-white hover:bg-gray-50 text-primary-600 font-semibold py-3 px-6 rounded-lg border-2 border-primary-600 transition-all duration-300 ease-out transform hover:scale-105 hover:shadow-lg;
   }
-  
-  .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
-  }
-  
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
-  .gradient-bg {
-    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
   }
-  
-  .glass-effect {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
-  }
-}
-
-@layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-  
-  /* Custom smooth scroll animation */
-  .smooth-scroll {
-    scroll-behavior: smooth;
-    transition: scroll-behavior 0.3s ease-in-out;
-  }
-}
-
-/* Custom scroll behavior for slower, more controlled scrolling */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
-/* Override default smooth scroll with custom timing */
-* {
-  scroll-behavior: smooth;
-}
-
-/* Custom scroll animation keyframes */
-@keyframes smoothScroll {
-  from {
-    scroll-behavior: auto;
-  }
-  to {
-    scroll-behavior: smooth;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500;
   }
 }
 
@@ -158,7 +107,20 @@ section:target {
   }
 }
 
-/* Ensure smooth scrolling works on all browsers */
-* {
-  scroll-behavior: smooth;
+/* Responsive background images */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+/* Mobile-specific background optimizations */
+@media (max-width: 480px) {
+  body {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: scroll;
+  }
 }
