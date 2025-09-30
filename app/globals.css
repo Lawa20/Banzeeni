@@ -7,16 +7,8 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 120px; /* Account for fixed navbar */
-    /* Fix shaking/jittery scrolling */
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
-    /* Optimize scroll performance */
-    scroll-snap-type: none;
-    -webkit-scroll-behavior: smooth;
-    /* Prevent scroll conflicts */
+    /* Prevent horizontal scroll */
     overflow-x: hidden;
-    /* Ensure scrolling works */
-    overflow-y: auto;
   }
   
   * {
@@ -30,11 +22,6 @@
     line-height: 1.6;
     background-color: #000000;
     overflow-x: hidden;
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
-    /* Prevent scroll jitter */
-    scroll-behavior: smooth;
-    -webkit-scroll-behavior: smooth;
     color: #ffffff;
     background-image: url('/images/Banzeeni.jpg');
     background-size: cover;
@@ -75,13 +62,10 @@
   @media (min-width: 769px) {
     html {
       scroll-behavior: smooth;
-      -webkit-scroll-behavior: smooth;
-      overscroll-behavior: none;
       overflow-x: hidden;
     }
     
     body {
-      overscroll-behavior: none;
       /* Better desktop scroll performance */
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -143,17 +127,14 @@
       background-repeat: no-repeat !important;
     }
     
-    /* Fix glitchy mobile scrolling and prevent shaking */
+    /* Fix glitchy mobile scrolling */
     html {
       scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: none;
       overflow-x: hidden;
     }
     
     body {
-      overscroll-behavior: none;
-      -webkit-overflow-scrolling: touch;
+      /* Mobile scroll optimization */
     }
   }
   
@@ -183,17 +164,14 @@
       background-repeat: no-repeat !important;
     }
     
-    /* Enhanced mobile scroll fixes and prevent shaking */
+    /* Enhanced mobile scroll fixes */
     html {
       scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: none;
       overflow-x: hidden;
     }
     
     body {
-      overscroll-behavior: none;
-      -webkit-overflow-scrolling: touch;
+      /* Small mobile scroll optimization */
     }
   }
   
@@ -324,14 +302,10 @@ section {
     /* Simple class for fixed elements */
   }
   
-  /* Optimize scroll performance without blocking */
+  /* Optimize scroll performance */
   html, body {
     /* Enable smooth scrolling */
     scroll-behavior: smooth;
-    -webkit-scroll-behavior: smooth;
-    /* Prevent scroll conflicts but allow scrolling */
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
   }
 
 @media (max-width: 480px) {
