@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Menu, X, Smartphone } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -108,27 +107,12 @@ export function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-700 overflow-hidden"
-            >
-              <motion.div 
-                initial={{ y: -15, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="py-4 space-y-3 px-4"
-              >
+        {isOpen && (
+          <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-700 overflow-hidden animate-slide-down">
+              <div className="py-4 space-y-3 px-4">
                 {navItems.map((item, index) => (
-                  <motion.button
+                  <button
                     key={item.name}
-                    initial={{ x: -15, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 0.15 + index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
                     onClick={() => {
                       smoothScrollTo(item.href)
                       setIsOpen(false)
@@ -136,14 +120,9 @@ export function Navbar() {
                     className="block w-full text-left px-3 py-3 text-white hover:text-primary-400 font-medium transition-colors hover:translate-x-2 rounded-lg hover:bg-gray-800/50"
                   >
                     {item.name}
-                  </motion.button>
+                  </button>
                 ))}
-                <motion.div 
-                  initial={{ y: 15, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="pt-2 border-t border-gray-700"
-                >
+                <div className="pt-2 border-t border-gray-700">
                   <button 
                     onClick={() => window.open('https://apps.apple.com/iq/app/banzeeni/id6443919393', '_blank')}
                     className="w-full btn-primary flex items-center justify-center space-x-2 hover:scale-105 transition-transform duration-200 text-sm py-3"
@@ -151,11 +130,10 @@ export function Navbar() {
                     <Smartphone className="w-4 h-4" />
                     <span>Download App</span>
                   </button>
-                </motion.div>
-              </motion.div>
-            </motion.div>
+                </div>
+              </div>
+            </div>
           )}
-        </AnimatePresence>
       </div>
     </nav>
   )
