@@ -39,7 +39,7 @@ export function Navbar() {
       const startPosition = window.pageYOffset
       const distance = targetPosition - startPosition
       const duration = 1000 // Slightly longer for smoother feel
-      let start = null
+      let start: number | null = null
 
       const animation = (currentTime: number) => {
         if (start === null) start = currentTime

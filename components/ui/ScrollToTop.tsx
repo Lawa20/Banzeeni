@@ -23,7 +23,7 @@ export function ScrollToTop() {
     const startPosition = window.pageYOffset
     const distance = -startPosition
     const duration = 800 // Optimal duration for smooth feel
-    let start = null
+    let start: number | null = null
 
     const animation = (currentTime: number) => {
       if (start === null) start = currentTime
