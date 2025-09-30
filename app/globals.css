@@ -31,23 +31,25 @@
   /* Mobile background optimization */
   @media (max-width: 768px) {
     body {
+      background-image: url('/images/Banzeeni.jpg');
       background-size: cover;
       background-position: center center;
       background-attachment: scroll;
       background-repeat: no-repeat;
-      /* Optimize for mobile performance */
-      background-image: url('/images/Banzeeni.jpg');
+      /* Force background to show on mobile */
+      background-color: #000000;
     }
   }
   
   @media (max-width: 480px) {
     body {
+      background-image: url('/images/Banzeeni.jpg');
       background-size: cover;
       background-position: center center;
       background-attachment: scroll;
       background-repeat: no-repeat;
       /* Ensure proper mobile background */
-      background-image: url('/images/Banzeeni.jpg');
+      background-color: #000000;
     }
   }
   
@@ -150,6 +152,28 @@ section {
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
+  
+  /* Mobile scroll arrow improvements */
+  .animate-bounce-slow {
+    animation: bounceSlow 2s ease-in-out infinite;
+  }
+  
+  /* Hide scroll indicator on very small screens */
+  @media (max-width: 360px) {
+    .scroll-indicator {
+      display: none;
+    }
+  }
+}
+
+/* Add bounceSlow keyframe */
+@keyframes bounceSlow {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-8px); 
+  }
 }
 
 @media (max-width: 480px) {
@@ -190,10 +214,12 @@ section:target {
 /* Mobile Responsive Improvements */
 @media (max-width: 768px) {
   body {
+    background-image: url('/images/Banzeeni.jpg');
     background-attachment: scroll;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    background-color: #000000;
   }
   
   .container-custom {
@@ -238,10 +264,12 @@ section:target {
 /* Small Mobile Optimizations */
 @media (max-width: 480px) {
   body {
+    background-image: url('/images/Banzeeni.jpg');
     background-size: cover;
     background-position: center center;
     background-attachment: scroll;
     background-repeat: no-repeat;
+    background-color: #000000;
   }
   
   .container-custom {

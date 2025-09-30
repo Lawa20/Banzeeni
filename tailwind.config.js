@@ -74,7 +74,7 @@ module.exports = {
         'slide-up': 'slideUp 0.5s ease-out',
         'slide-in-left': 'slideInLeft 0.5s ease-out',
         'slide-in-right': 'slideInRight 0.5s ease-out',
-        'bounce-slow': 'bounce 2s infinite',
+        'bounce-slow': 'bounceSlow 2s ease-in-out infinite',
         'pulse-slow': 'pulse 3s infinite',
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
@@ -99,6 +99,10 @@ module.exports = {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },
+        },
+        bounceSlow: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
         },
         glow: {
           '0%': { boxShadow: '0 0 5px #475569, 0 0 10px #475569, 0 0 15px #475569' },

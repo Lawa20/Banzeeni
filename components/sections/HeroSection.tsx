@@ -82,8 +82,11 @@ export function HeroSection() {
           </div>
 
           {/* Scroll Indicator */}
-          <div className="animate-bounce">
-            <ChevronDown className="w-8 h-8 text-white mx-auto opacity-60" />
+          <div className="scroll-indicator flex flex-col items-center space-y-2">
+            <div className="text-white text-sm opacity-70 mb-2">Scroll to explore</div>
+            <div className="animate-bounce-slow">
+              <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 text-white mx-auto opacity-60" />
+            </div>
           </div>
         </div>
       </div>
