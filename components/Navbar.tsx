@@ -27,16 +27,25 @@ export function Navbar() {
     if (element) {
       const elementRect = element.getBoundingClientRect()
       const elementTop = elementRect.top + window.pageYOffset
-      const navbarHeight = 80
+      const navbarHeight = window.innerWidth < 768 ? 60 : 80
       
       const isAboutSection = elementId === '#about'
-      const paddingOffset = isAboutSection ? 60 : 40
+      const paddingOffset = isAboutSection ? (window.innerWidth < 768 ? 40 : 60) : (window.innerWidth < 768 ? 20 : 40)
       const targetPosition = elementTop - navbarHeight - paddingOffset
       
-      // Use requestAnimationFrame for ultra-smooth scrolling
+      // Use native smooth scroll on mobile for better performance
+      if (window.innerWidth < 768) {
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+        return
+      }
+      
+      // Desktop smooth scroll with requestAnimationFrame
       const startPosition = window.pageYOffset
       const distance = targetPosition - startPosition
-      const duration = 800
+      const duration = Math.min(Math.abs(distance) * 0.4, 800) // Responsive duration
       let start: number | null = null
 
       const animation = (currentTime: number) => {
@@ -44,8 +53,10 @@ export function Navbar() {
         const timeElapsed = currentTime - start
         const progress = Math.min(timeElapsed / duration, 1)
         
-        // Smooth easing function
-        const ease = 1 - Math.pow(1 - progress, 3)
+        // Smoother easing function for less shakiness
+        const ease = progress < 0.5 
+          ? 2 * progress * progress 
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2
         
         window.scrollTo(0, startPosition + distance * ease)
         
