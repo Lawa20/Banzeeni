@@ -302,9 +302,17 @@ section {
     /* Simple class for fixed elements */
   }
   
-  /* Basic scroll - no blocking */
-  html, body {
-    /* Basic scroll behavior */
+  /* Smooth scroll with immediate response */
+  html {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  body {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
     overflow-x: hidden;
     overflow-y: auto;
   }

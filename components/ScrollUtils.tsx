@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 
 export function ScrollUtils() {
   useEffect(() => {
-    // Simple scroll utility - no blocking
-    const scrollTo = (target: string) => {
+    // Smooth scroll utility with immediate response
+    const smoothScrollTo = (target: string) => {
       const element = document.querySelector(target)
       if (element) {
         const elementRect = element.getBoundingClientRect()
@@ -14,13 +14,21 @@ export function ScrollUtils() {
         
         const targetPosition = elementTop - navbarHeight
         
-        // Simple scroll - no blocking
-        window.scrollTo(0, targetPosition)
+        // Try smooth scroll first, fallback to instant scroll
+        if ('scrollBehavior' in document.documentElement.style) {
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          })
+        } else {
+          // Fallback for browsers that don't support smooth scroll
+          window.scrollTo(0, targetPosition)
+        }
       }
     }
 
-    // Add scroll to navigation links
-    const addScrollToLinks = () => {
+    // Add smooth scroll to navigation links
+    const addSmoothScrollToLinks = () => {
       const navLinks = document.querySelectorAll('a[href^="#"]')
       navLinks.forEach(link => {
         link.removeEventListener('click', handleLinkClick)
@@ -32,15 +40,15 @@ export function ScrollUtils() {
       e.preventDefault()
       const target = (e.target as HTMLAnchorElement).getAttribute('href')
       if (target) {
-        scrollTo(target)
+        smoothScrollTo(target)
       }
     }
 
-    addScrollToLinks()
+    addSmoothScrollToLinks()
 
     // Re-add listeners when DOM changes
     const observer = new MutationObserver(() => {
-      addScrollToLinks()
+      addSmoothScrollToLinks()
     })
 
     observer.observe(document.body, {
@@ -48,11 +56,13 @@ export function ScrollUtils() {
       subtree: true
     })
 
-    // Remove ALL scroll blocking
+    // Enable smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth'
+    document.body.style.scrollBehavior = 'smooth'
+    
+    // Remove scroll blocking
     document.documentElement.style.overscrollBehavior = 'auto'
     document.body.style.overscrollBehavior = 'auto'
-    document.documentElement.style.willChange = 'auto'
-    document.body.style.willChange = 'auto'
 
     return () => {
       observer.disconnect()
