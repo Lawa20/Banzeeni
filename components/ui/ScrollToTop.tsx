@@ -20,32 +20,22 @@ export function ScrollToTop() {
   }, [])
 
   const scrollToTop = () => {
-    const startPosition = window.pageYOffset
-    const distance = -startPosition
-    const duration = 800 // Optimal duration for smooth feel
-    let start: number | null = null
-
-    const animation = (currentTime: number) => {
-      if (start === null) start = currentTime
-      const timeElapsed = currentTime - start
-      const progress = Math.min(timeElapsed / duration, 1)
-      
-      // Ultra-smooth easing function - easeOutExpo for buttery smooth ending
-      const easeOutExpo = (t: number) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
-      const ease = easeOutExpo(progress)
-      
-      const targetPosition = startPosition + distance * ease
-      window.scrollTo(0, targetPosition)
-      
-      if (timeElapsed < duration) {
-        requestAnimationFrame(animation)
-      } else {
-        // Final smooth landing
-        window.scrollTo(0, 0)
-      }
-    }
+    // Check if Lenis is available
+    const lenis = (window as any).lenis
     
-    requestAnimationFrame(animation)
+    if (lenis) {
+      // Use Lenis for ultra-smooth scroll to top
+      lenis.scrollTo(0, {
+        duration: 1.2,
+        easing: (t: number) => 1 - Math.pow(1 - t, 3)
+      })
+    } else {
+      // Fallback to native smooth scroll
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
   }
 
   if (!isVisible) return null

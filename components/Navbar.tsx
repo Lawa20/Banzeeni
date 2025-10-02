@@ -37,19 +37,38 @@ export function Navbar() {
   const smoothScrollTo = (elementId: string) => {
     const element = document.querySelector(elementId)
     if (element) {
-      const elementRect = element.getBoundingClientRect()
-      const elementTop = elementRect.top + window.pageYOffset
-      const navbarHeight = isMobile ? 60 : 80
+      // Check if Lenis is available (from global window object)
+      const lenis = (window as any).lenis
       
-      const isAboutSection = elementId === '#about'
-      const paddingOffset = isAboutSection ? (isMobile ? 40 : 60) : (isMobile ? 20 : 40)
-      const targetPosition = elementTop - navbarHeight - paddingOffset
-      
-      // Use native smooth scroll for better mobile compatibility
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      })
+      if (lenis) {
+        // Use Lenis for smooth scrolling
+        const elementRect = element.getBoundingClientRect()
+        const elementTop = elementRect.top + window.pageYOffset
+        const navbarHeight = isMobile ? 60 : 80
+        
+        const isAboutSection = elementId === '#about'
+        const paddingOffset = isAboutSection ? (isMobile ? 40 : 60) : (isMobile ? 20 : 40)
+        const targetPosition = elementTop - navbarHeight - paddingOffset
+        
+        lenis.scrollTo(targetPosition, {
+          duration: isMobile ? 1.0 : 1.2,
+          easing: (t: number) => 1 - Math.pow(1 - t, 3)
+        })
+      } else {
+        // Fallback to native smooth scroll
+        const elementRect = element.getBoundingClientRect()
+        const elementTop = elementRect.top + window.pageYOffset
+        const navbarHeight = isMobile ? 60 : 80
+        
+        const isAboutSection = elementId === '#about'
+        const paddingOffset = isAboutSection ? (isMobile ? 40 : 60) : (isMobile ? 20 : 40)
+        const targetPosition = elementTop - navbarHeight - paddingOffset
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+      }
     }
   }
 
